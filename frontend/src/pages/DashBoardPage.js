@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { getUserSavedJobs, getUserApplications, removeJob } from '../services/userService';
+import { getUserSavedJobs, getUserApplications, removeJob } from '../services/userservice';
 import JobCard from '../components/JobCard';
 
 const DashboardPage = () => {
