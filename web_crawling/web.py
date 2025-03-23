@@ -12,7 +12,7 @@ from datetime import datetime
 from webdriver_manager.chrome import ChromeDriverManager  # type: ignore
 
 # ✅ Display Stylish Header
-ascii_art = pyfiglet.figlet_format("WEBZ-SCRAPPER\nCREATED BY\nGURUXSamruddhi", font="slant")
+ascii_art = pyfiglet.figlet_format("WEBZ-SCRAPPER\nCREATED BY\nTeamMatrix", font="slant")
 print("\033[1;36m" + ascii_art + "\033[0m")  # Cyan color text
 
 # ✅ Get User Input
