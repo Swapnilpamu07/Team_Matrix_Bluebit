@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+ # Unified Job & Internship Aggregator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a **web platform** that scrapes job postings from multiple sources and presents them in a unified interface. The backend is built with **Flask **, and the frontend is developed using **React**. Currently, the login/signup system is **partially implemented**, and the backend is successfully connected to the frontend.
 
-## Available Scripts
+## 🚀 Features
+- Job scraping from multiple sources
+- Display job listings dynamically
+- Backend with Flask  
+- Frontend with React (Connected to Backend)
+- **Login/Signup system (Partially Implemented)**
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🛠️ Setup and Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### **1. Clone the Repository**
+```sh
+git clone https://github.com/your-repo/unified-job-aggregator.git
+cd unified-job-aggregator
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### **2. Backend Setup (Flask & MongoDB)**
+#### **📌 Prerequisites:**
+- Python (3.8 or later)
+- MongoDB (Cloud or Local)
+- Pip
 
-### `npm test`
+#### **🔹 Install Dependencies**
+```sh
+cd backend
+pip install -r requirements.txt
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  
+#### **🔹 Run the Backend Server**
+```sh
+python app.py
+```
+By default, the backend runs on: `http://127.0.0.1:5000/`
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### **3. Frontend Setup (React)**
+#### **📌 Prerequisites:**
+- Node.js (16+ recommended)
+- npm or yarn
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### **🔹 Install Dependencies**
+```sh
+cd frontend
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### **🔹 Start the Frontend Server**
+```sh
+npm start
+```
+By default, the frontend runs on: `http://localhost:3000/`
 
-### `npm run eject`
+#### **🔹 Configuration (Connect Frontend to Backend)**
+In `frontend/src/config.js`, update the API URL:
+```js
+export const API_BASE_URL = "http://127.0.0.1:5000";  // Flask Backend URL
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🏗️ Current Progress
+✅ **Backend** is running and connected to the frontend.  
+✅ **Frontend** can display job listings dynamically.  
+⚠️ **Login/Signup system is partially implemented** (MongoDB connection established but authentication logic needs completion).  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## ❓ Troubleshooting
+### **Common Errors & Fixes**
+- **MongoDB Connection Error** → Ensure MongoDB is running or check your `MONGO_URI`.
+- **CORS Issues** → Make sure Flask has `flask_cors` installed and enabled.
+- **Frontend Not Updating?** → Try restarting the React server (`CTRL + C`, then `npm start`).
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 💡 Next Steps
+- ✅ Complete authentication system (Login/Signup/Logout with MongoDB)
+- ✅ Improve UI/UX for better user experience
+- ✅ Add filtering and search functionality for jobs
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 📜 License
+This project is open-source. Feel free to contribute!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
