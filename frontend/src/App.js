@@ -1,36 +1,85 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import SearchPage from './pages/SearchPage';
-import JobDetailsPage from './pages/JobDetailsPage';
-import DashboardPage from './pages/DashBoardPage';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import { AuthProvider } from './context/AuthContext'; // Import the AuthProvider
-import './styles.css';
+import React, { useState } from "react";
+import axios from "axios";
 
 function App() {
+  const [formData, setFormData] = useState({
+    job_role: "",
+    job_location: "",
+    job_field: "",
+  });
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setJobs([]);
+
+    try {
+      const response = await axios.post("http://127.0.0.1:5000/scrape", formData);
+      setJobs(response.data);
+    } catch (err) {
+      setError("Failed to fetch jobs. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <AuthProvider> {/* Wrap everything in AuthProvider */}
-      <Router>
-        <div className="app">
-          <Navbar />
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/job/:id" element={<JobDetailsPage />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-            </Routes>
-          </main>
-          <Footer />
+    <div className="container">
+      <h1>Job Scraper</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="job_role"
+          placeholder="Job Role (e.g., Software Engineer)"
+          value={formData.job_role}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="job_location"
+          placeholder="Job Location (e.g., India)"
+          value={formData.job_location}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="job_field"
+          placeholder="Job Field (e.g., IT, Finance, Healthcare)"
+          value={formData.job_field}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? "Scraping..." : "Fetch Jobs"}
+        </button>
+      </form>
+
+      {error && <p className="error">{error}</p>}
+
+      {jobs.length > 0 && (
+        <div className="results">
+          <h2>Scraped Jobs</h2>
+          <ul>
+            {jobs.map((job, index) => (
+              <li key={index}>
+                <strong>{job.title}</strong> at {job.company} ({job.location})  
+                - <a href={job.link} target="_blank" rel="noopener noreferrer">View Job</a>
+              </li>
+            ))}
+          </ul>
         </div>
-      </Router>
-    </AuthProvider>
+      )}
+    </div>
   );
 }
 
